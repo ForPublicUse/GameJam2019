@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Level3 : IQuestion
 {
-    public LaptopGame LaptopGame;
     public Dictionary<Vector2,MapUnit> mapUnits = new Dictionary<Vector2, MapUnit>();
+    private int xMax = 0;
+    private int yMax = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +14,14 @@ public class Level3 : IQuestion
         {
             mapUnits.Add(child.pos, child);
             child.level3 = this;
+            if (child.pos.x > xMax)
+            {
+                xMax = (int)child.pos.x;
+            }
+            if (child.pos.y > yMax)
+            {
+                yMax = (int)child.pos.y;
+            }
         }
     }
 
@@ -49,5 +58,27 @@ public class Level3 : IQuestion
         }
         return true;
     }
-   
+
+
+    public void CheckMakeTrouble()
+    {
+        if (toMakeTrouble)
+        {
+            MakeTrouble();
+        }
+        toMakeTrouble = false;
+    }
+
+    bool toMakeTrouble = false;
+    public override void MakeTrouble()
+    {
+        if (isLocked)
+        {
+            toMakeTrouble = true;
+        }
+        else
+        {
+            OnChildClick(new Vector2(Random.Range(0, xMax), Random.Range(0, yMax)));
+        }
+    }
 }

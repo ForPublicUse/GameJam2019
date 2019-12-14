@@ -17,6 +17,12 @@ public class GameManager : MonoBehaviour
     public cameraLookAround cameraLookAround;
     public sliderControl sliderControl;
 
+    private void Start()
+    {
+        sliderControl = FindObjectOfType<sliderControl>();
+        cameraLookAround = FindObjectOfType<cameraLookAround>();
+    }
+
     public void FailLogic()
     {
         if (laptop != null)
@@ -85,5 +91,10 @@ public class GameManager : MonoBehaviour
                 gamePlayRunning = true;
             }
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            FailLogic();
+        }
     }
+
 }
