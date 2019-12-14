@@ -26,8 +26,8 @@ public class LaptopGame : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        RightPosition = new Vector3(-Screen.width, 0, 0);
-        transform.localPosition = RightPosition;
+        LeftPosition = new Vector3(-Screen.width, 0, 0);
+        transform.localPosition = LeftPosition;
         LeftTime = totalTime;
         CurrentLevel = questions[0];
         for (int i = 0; i < tabs.Count; i++)
@@ -85,14 +85,14 @@ public class LaptopGame : MonoBehaviour
         gameManager.SuccessLogic();
     }
 
-    private Vector3 LeftPosition = Vector3.zero;
-    public Vector3 RightPosition = new Vector3(-1920,0,0);
-    private bool inLeft = false;
+    private Vector3 RightPosition = Vector3.zero;
+    public Vector3 LeftPosition = new Vector3(-1920,0,0);
+    private bool inLeft = true;
     public float moveTime = 2f;
     public void RightClick()
     {
         //Action action = () => { transform.localPosition = inLeft ? RightPosition : LeftPosition; };
-        var hash = iTween.Hash("position", inLeft ? RightPosition : LeftPosition, "islocal", true, "time", moveTime);
+        var hash = iTween.Hash("position", inLeft ?  RightPosition: LeftPosition, "islocal", true, "time", moveTime);
         iTween.MoveTo(gameObject, hash);
         inLeft = !inLeft;
     }

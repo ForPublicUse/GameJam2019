@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
         laptop = Instantiate(laptopPrefab) as GameObject;
         laptop.transform.SetParent(transform);
         laptopGame = laptop.GetComponent<LaptopGame>();
-        laptop.transform.localPosition = laptopGame.RightPosition;
+        laptop.transform.localPosition = laptopGame.LeftPosition;
         laptopGame.gameManager = this;
         laptop.SetActive(true);
         timeSlider = laptopGame.TimeSlider.gameObject;
