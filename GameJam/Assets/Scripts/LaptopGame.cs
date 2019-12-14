@@ -103,7 +103,10 @@ public class LaptopGame : MonoBehaviour
     }
     void ShakeLaptop()
     {
-        iTween.ShakePosition(gameObject, ShakeVec, 0.5f);
+        if (!inLeft)
+        {
+            iTween.ShakePosition(gameObject, ShakeVec, 0.5f);
+        }
     }
     public Vector3 ShakeVec = new Vector3(5, 5, 5);
 
