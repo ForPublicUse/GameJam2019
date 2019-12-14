@@ -96,6 +96,7 @@ public class sliderControl : MonoBehaviour
                 filled.GetComponent<Image>().color = oriFilledColor;
                 powerText.GetComponent<Text>().color = oriPowerTextColor;
                 sliderRun.GetComponent<sliderRun>().enabled = true;
+                controlCanvas.gameObject.SetActive(false);
             }
         }
 

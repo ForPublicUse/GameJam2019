@@ -34,6 +34,7 @@ public class DogRunSphere : MonoBehaviour
         bDogReturn = false;
         MouseSphere.SetActive(false);
         //Dog.GetComponent<Animator>().CrossFade("", 0.1, -1, 0);
+        DogSphere.transform.position = Player.transform.position;
         LastVec = GetDogTransform().position;
         LastPos = DogSphere.transform.position;
     }
@@ -45,6 +46,7 @@ public class DogRunSphere : MonoBehaviour
         {
             bPushSphere = false;
             bActiveDog = true;
+            DogSphere.SetActive(true);
             fWaitTime = fInvokeTime;
             Animator.SetBool("Bark_b", false);
         }
@@ -53,6 +55,7 @@ public class DogRunSphere : MonoBehaviour
         {
             if (fWaitTime > 0)
             {
+                GetDogTransform().LookAt(Player.transform.position);
                 fWaitTime -= Time.deltaTime;
             }
 
@@ -78,7 +81,7 @@ public class DogRunSphere : MonoBehaviour
 
     void RunSphere()
     {
-        //Dog.transform.LookAt(new Vector3(Dog.transform.position.x, DogSphere.transform.position.y, Dog.transform.position.z));
+        //Dog.transform.LookAt(new Vector3(DogSphere.transform.position.x, DogSphere.transform.position.y, Dog.transform.position.z));
         GetDogTransform().LookAt(DogSphere.transform.position);
         GetDogTransform().Translate(GetDogTransform().forward * Time.deltaTime * fDogMoveSpeed, Space.World);
     }
@@ -126,6 +129,7 @@ public class DogRunSphere : MonoBehaviour
     void CallPlayer()
     {
         GetDogTransform().LookAt(Player.transform.position);
+        DogSphere.SetActive(false);
         //do animation
         Animator.SetBool("Bark_b", true);
     }
