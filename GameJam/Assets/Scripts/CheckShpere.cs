@@ -19,6 +19,7 @@ public class CheckShpere : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Destroy(CheckObject);
+        //Destroy(CheckObject);
+
     }
 }
