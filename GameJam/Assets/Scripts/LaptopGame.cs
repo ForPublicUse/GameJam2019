@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -79,7 +80,8 @@ public class LaptopGame : MonoBehaviour
     public float moveTime = 2f;
     public void RightClick()
     {
-        var hash = iTween.Hash("position", inLeft?RightPosition:LeftPosition, "islocal",true, "time", moveTime);
+        //Action action = () => { transform.localPosition = inLeft ? RightPosition : LeftPosition; };
+        var hash = iTween.Hash("position", inLeft ? RightPosition : LeftPosition, "islocal", true, "time", moveTime);
         iTween.MoveTo(gameObject, hash);
         inLeft = !inLeft;
     }

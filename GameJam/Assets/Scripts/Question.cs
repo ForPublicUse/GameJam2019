@@ -22,4 +22,15 @@ public class IQuestion:MonoBehaviour
     {
         return gameObject;
     }
+
+    protected bool isLocked = false;
+    protected void LockQuestion()
+    {
+        isLocked = true;
+    }
+
+    protected void UnLockQuestion()
+    {
+        isLocked = false;
+    }
 }
