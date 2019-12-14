@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +24,8 @@ public class LaptopGame : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        RightPosition = new Vector3(-Screen.width, 0, 0);
+        transform.localPosition = RightPosition;
         LeftTime = totalTime;
         for (int i = 0; i < tabs.Count; i++)
         {
@@ -79,7 +82,8 @@ public class LaptopGame : MonoBehaviour
     public float moveTime = 2f;
     public void RightClick()
     {
-        var hash = iTween.Hash("position", inLeft?RightPosition:LeftPosition, "islocal",true, "time", moveTime);
+        //Action action = () => { transform.localPosition = inLeft ? RightPosition : LeftPosition; };
+        var hash = iTween.Hash("position", inLeft ? RightPosition : LeftPosition, "islocal", true, "time", moveTime);
         iTween.MoveTo(gameObject, hash);
         inLeft = !inLeft;
     }
