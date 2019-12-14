@@ -50,10 +50,23 @@ public class sliderControl : MonoBehaviour
         oriFilledColor = filled.GetComponent<Image>().color;
         oriPowerTextColor = powerText.GetComponent<Text>().color;
     }
+    bool isRunning = false;
+    public void StartRunning()
+    {
+        isRunning = true;
+    }
 
+    public void StopRunning()
+    {
+        isRunning = false;
+    }
     // Update is called once per frame
     void Update()
     {
+        if (!isRunning)
+        {
+            return;
+        }
         if (Input.GetMouseButtonDown(0))
         {
             if(style == 0)

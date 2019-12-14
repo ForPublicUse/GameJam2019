@@ -14,12 +14,11 @@ public class cameraLookAround : MonoBehaviour
 
     public int cameraSpeed;
 
+    private Transform PriTrans;
     // Start is called before the first frame update
     void Start()
     {
-        //隐藏鼠标
-        Cursor.visible = false;
-        Cursor.lockState =  CursorLockMode.Confined;
+        
         cameraTransform = Camera.main.transform;
         cameraAngle = cameraTransform.eulerAngles;
     }
@@ -27,7 +26,20 @@ public class cameraLookAround : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cameraMove();
+        if (isRunning)
+        {
+            cameraMove();
+        }
+    }
+    bool isRunning = false;
+    public void StartRunning()
+    {
+        isRunning = true;
+    }
+
+    public void StopRunning()
+    {
+        isRunning = false;
     }
 
     public void cameraMove()
@@ -53,9 +65,26 @@ public class cameraLookAround : MonoBehaviour
         cameraTransform.eulerAngles = cameraAngle;
     }
 
+    void ShowMouse()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    void HideMouse()
+    {
+        //隐藏鼠标
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
+    }
+
+    void ResetMouse()
+    {
+
+    }
 }
 
-
+    
 
 
 

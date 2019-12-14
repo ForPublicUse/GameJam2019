@@ -83,7 +83,10 @@ public class DogRunSphere : MonoBehaviour
     {
         //Dog.transform.LookAt(new Vector3(DogSphere.transform.position.x, DogSphere.transform.position.y, Dog.transform.position.z));
         GetDogTransform().LookAt(DogSphere.transform.position);
-        GetDogTransform().Translate(GetDogTransform().forward * Time.deltaTime * fDogMoveSpeed, Space.World);
+        Vector3 Vec = new Vector3(GetDogTransform().forward.x, GetDogTransform().forward.y, GetDogTransform().forward.z) * Time.deltaTime * fDogMoveSpeed;
+
+        GetDogTransform().Translate( Vec, Space.World);
+
     }
 
     private void OnTriggerEnter(Collider collider)
