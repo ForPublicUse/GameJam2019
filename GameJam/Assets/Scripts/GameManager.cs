@@ -12,8 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject laptopPrefab;
     public GameObject laptop;
     public LaptopGame laptopGame;
-    public GameObject gamePlayPrefab;
-    public GameObject gamePlay;
+    public GameObject timeSlider;
 
     public cameraLookAround cameraLookAround;
     public sliderControl sliderControl;
@@ -23,6 +22,8 @@ public class GameManager : MonoBehaviour
         if (laptop != null)
         {
             Destroy(laptop);
+            Destroy(timeSlider);
+
         }
         FailEnd.SetActive(true);
         sliderControl.StopRunning();
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
         if (laptop != null)
         {
             Destroy(laptop);
+            Destroy(timeSlider);
         }
         SuccessEnd.SetActive(true);
         sliderControl.StopRunning();
@@ -53,8 +55,9 @@ public class GameManager : MonoBehaviour
         laptop.transform.localPosition = laptopGame.RightPosition;
         laptopGame.gameManager = this;
         laptop.SetActive(true);
-
-        //gamePlay = Instantiate(gamePlayPrefab) as GameObject;
+        timeSlider = laptopGame.TimeSlider.gameObject;
+        timeSlider.transform.SetParent(transform);
+        timeSlider.transform.localPosition = new Vector3(0, -Screen.height / 2 + 105, 0);
 
         StartMenu.SetActive(false);
 
