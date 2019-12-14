@@ -15,6 +15,7 @@ public class LaptopGame : MonoBehaviour
     public Slider TimeSlider;
     public float LeftTime;
     public List<Button> tabs;
+    private IQuestion CurrentLevel;
     public bool CheckAlive()
     {
         return LeftTime > 0;
@@ -27,6 +28,7 @@ public class LaptopGame : MonoBehaviour
         RightPosition = new Vector3(-Screen.width, 0, 0);
         transform.localPosition = RightPosition;
         LeftTime = totalTime;
+        CurrentLevel = questions[0];
         for (int i = 0; i < tabs.Count; i++)
         {
             var index = i;
@@ -37,6 +39,7 @@ public class LaptopGame : MonoBehaviour
                     question.obj().SetActive(false);
                 }
                 questions[index].obj().SetActive(true);
+                CurrentLevel = questions[index];
             });
         }
     }
@@ -50,7 +53,12 @@ public class LaptopGame : MonoBehaviour
             gameManager.FailLogic();
         }
         TimeSlider.value = LeftTime / totalTime;
-        
+
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            MakeTrouble();
+        }
     }
 
     public void Success()
@@ -86,5 +94,22 @@ public class LaptopGame : MonoBehaviour
         var hash = iTween.Hash("position", inLeft ? RightPosition : LeftPosition, "islocal", true, "time", moveTime);
         iTween.MoveTo(gameObject, hash);
         inLeft = !inLeft;
+    }
+
+    public void MakeTrouble()
+    {
+        ShakeLaptop();
+        CurrentLevel.MakeTrouble();
+    }
+    void ShakeLaptop()
+    {
+        iTween.ShakePosition(gameObject, ShakeVec, 0.5f);
+    }
+    public Vector3 ShakeVec = new Vector3(5, 5, 5);
+
+
+    public void OnQuestionSolved()
+    {
+
     }
 }

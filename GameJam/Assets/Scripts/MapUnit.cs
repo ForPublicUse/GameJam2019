@@ -41,6 +41,7 @@ public class MapUnit : MonoBehaviour
     void Unlock()
     {
         islock = false;
+        level3.CheckMakeTrouble();
     }
 
     public void OnClick()

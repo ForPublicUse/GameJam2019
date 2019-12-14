@@ -7,9 +7,12 @@ using UnityEngine;
 
 public class IQuestion:MonoBehaviour
 {
+    public LaptopGame LaptopGame;
+
     public virtual void Win()
     {
         isClear = true;
+        LaptopGame.OnQuestionSolved();
     }
 
     protected bool isClear = false;
@@ -32,5 +35,10 @@ public class IQuestion:MonoBehaviour
     protected void UnLockQuestion()
     {
         isLocked = false;
+    }
+
+    public virtual void MakeTrouble()
+    {
+
     }
 }
