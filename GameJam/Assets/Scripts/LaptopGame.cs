@@ -47,10 +47,7 @@ public class LaptopGame : MonoBehaviour
             gameManager.FailLogic();
         }
         TimeSlider.value = LeftTime / totalTime;
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            RightClick();
-        }
+        
     }
 
     public void Success()
@@ -77,8 +74,8 @@ public class LaptopGame : MonoBehaviour
     }
 
     private Vector3 LeftPosition = Vector3.zero;
-    private Vector3 RightPosition = new Vector3(-1920,0,0);
-    private bool inLeft = true;
+    public Vector3 RightPosition = new Vector3(-1920,0,0);
+    private bool inLeft = false;
     public float moveTime = 2f;
     public void RightClick()
     {

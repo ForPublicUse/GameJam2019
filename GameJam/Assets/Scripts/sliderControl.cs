@@ -63,11 +63,7 @@ public class sliderControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isRunning)
-        {
-            return;
-        }
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && isRunning)
         {
             if(style == 0)
             {
@@ -82,7 +78,9 @@ public class sliderControl : MonoBehaviour
 
                 AddStrength.fStrengthPercentage = sliderRun.getPercent();
 
-                SendMessage("pauseSlider", AddStrength.bClick);
+                sliderRun.pauseSlider();
+
+                //SendMessage("pauseSlider", AddStrength.bClick);
                 PushShpereCount++;
                 style = 2;
                 Invoke("fadeSlide", sleepSecond);
