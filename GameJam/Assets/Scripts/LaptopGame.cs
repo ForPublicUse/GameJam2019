@@ -15,6 +15,7 @@ public class LaptopGame : MonoBehaviour
     public Slider TimeSlider;
     public float LeftTime;
     public List<Button> tabs;
+    public GameObject add30;
     private IQuestion CurrentLevel;
     public bool CheckAlive()
     {
@@ -113,6 +114,13 @@ public class LaptopGame : MonoBehaviour
 
     public void OnQuestionSolved()
     {
+        add30.SetActive(true);
+        LeftTime += 30;
+        Invoke("HideAddLabel", 2f);
+    }
 
+    void HideAddLabel()
+    {
+        add30.SetActive(false);
     }
 }
