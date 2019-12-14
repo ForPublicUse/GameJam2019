@@ -15,6 +15,8 @@ public class DogRunSphere : MonoBehaviour
 
     public Animator Animator;
 
+    public float fTroubleTIME;
+
     public bool bPushSphere;
     public float fInvokeTime;
     public float fDogMoveSpeed;
@@ -24,11 +26,18 @@ public class DogRunSphere : MonoBehaviour
     public float fMaxHeight;
 
     private float fWaitTime;
+
+    private float fTroubleTime;
+    private bool bBeginTrouble;
+
+
     private bool bActiveDog;
     private bool bDogReturn;
 
     private Vector3 LastVec; 
     private Vector3 LastPos;
+
+    float waitingTime= 0;
 
     private bool bBreakTick;
     void Start()
@@ -36,6 +45,7 @@ public class DogRunSphere : MonoBehaviour
         bBreakTick = false;
         bActiveDog = false;
         bDogReturn = false;
+        bBeginTrouble = false;
         MouseSphere.SetActive(false);
         //Dog.GetComponent<Animator>().CrossFade("", 0.1, -1, 0);
         DogSphere.transform.position = Player.transform.position;
@@ -83,7 +93,18 @@ public class DogRunSphere : MonoBehaviour
         {
             GetDogTransform().position = LastVec;
             CallPlayer();
-            
+            fTroubleTime += Time.deltaTime;
+
+            if(fTroubleTime >= fTroubleTIME)
+            {
+                bBeginTrouble = true;
+            }
+            if(bBeginTrouble)
+            {
+                fTroubleTime = 0;
+                bBeginTrouble = false;
+                LaptopGame.MakeTrouble();
+            }
         }
     }
 
@@ -169,4 +190,17 @@ public class DogRunSphere : MonoBehaviour
         bDogReturn = true;
         bBreakTick = false;
     }
+
+    public LaptopGame LaptopGame
+    {
+        get
+        {
+            if (laptopGame== null )
+            {
+                laptopGame = FindObjectOfType<LaptopGame>();
+            }
+            return laptopGame;
+        }
+    }
+    private LaptopGame laptopGame;
 }
