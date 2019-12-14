@@ -2682,7 +2682,7 @@ MonoBehaviour:
   - {fileID: 3701136797833863432}
   - {fileID: 3701136797833863666}
   text: {fileID: 5243250842430672448}
-  totalTime: 300
+  totalTime: 60
   TimeSlider: {fileID: 3701136797833863275}
   LeftTime: 0
   tabs:

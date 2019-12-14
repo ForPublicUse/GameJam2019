@@ -37,8 +37,6 @@ public class DogRunSphere : MonoBehaviour
     private Vector3 LastVec; 
     private Vector3 LastPos;
 
-    float waitingTime= 0;
-
     private bool bBreakTick;
     void Start()
     {
@@ -111,22 +109,23 @@ public class DogRunSphere : MonoBehaviour
     void RunSphere()
     {
         //GetDogTransform().LookAt(DogSphere.transform.position);
-        Vector3 Vec = GetDogTransform().forward * Time.deltaTime * fDogMoveSpeed;
-
+        //Vector3 LookAtVec = Dog.transform.LookAt(DogSphere.transform.position);
         object ray = Camera.main.ScreenPointToRay(-GetDogTransform().up); //屏幕坐标转射线
         RaycastHit hit;
         bool isHit = Physics.Raycast((Ray) ray, out hit);
         if(isHit)
         {
-            if(hit.distance > fMaxHeight)
+            //Vector3 vec = hit.transform.position + new Vector3(0, 0, 90);
+            if (hit.distance > fMaxHeight)
             {
-                Dog.transform.LookAt(new Vector3(DogSphere.transform.position.x, DogSphere.transform.position.y, (Dog.transform.position.z + fMaxHeight)));
+                Dog.transform.LookAt(new Vector3(DogSphere.transform.position.x, (Dog.transform.position.y + fMaxHeight), DogSphere.transform.position.z));
             }
             else
             {
                 Dog.transform.LookAt(DogSphere.transform.position);
             }
         }
+        Vector3 Vec = GetDogTransform().forward * Time.deltaTime * fDogMoveSpeed;
         GetDogTransform().Translate( Vec, Space.World);
 
     }
