@@ -110,15 +110,15 @@ public class LaptopGame : MonoBehaviour
 
     public void MakeTrouble()
     {
-        ShakeLaptop();
-        CurrentLevel.MakeTrouble();
+        if (!inLeft)
+        {
+            ShakeLaptop();
+            CurrentLevel.MakeTrouble();
+        }
     }
     void ShakeLaptop()
     {
-        if (!inLeft)
-        {
-            iTween.ShakePosition(gameObject, ShakeVec, 0.5f);
-        }
+         iTween.ShakePosition(gameObject, ShakeVec, 0.5f);
     }
     public Vector3 ShakeVec = new Vector3(5, 5, 5);
 
