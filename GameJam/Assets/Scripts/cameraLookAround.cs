@@ -6,7 +6,11 @@ public class cameraLookAround : MonoBehaviour
 {
     private Transform cameraTransform;
     private Vector3 cameraAngle;
-    //private float cameraHeight = 2.5f;
+
+    public int xAngleMin;
+    public int xAngleMax;
+    public int yAngleMin;
+    public int yAngleMax;
 
     // Start is called before the first frame update
     void Start()
@@ -14,10 +18,7 @@ public class cameraLookAround : MonoBehaviour
         //隐藏鼠标
         Cursor.visible = false;
         Cursor.lockState =  CursorLockMode.Confined;
-
         cameraTransform = Camera.main.transform;
-        cameraTransform.position = transform.position;
-        cameraTransform.rotation = transform.rotation;
         cameraAngle = cameraTransform.eulerAngles;
     }
 
@@ -30,11 +31,15 @@ public class cameraLookAround : MonoBehaviour
     public void cameraMove()
     {
         float y = Input.GetAxis("Mouse X");
-        Debug.Log(y);
         float x = Input.GetAxis("Mouse Y");
-        Debug.Log(x);
-        cameraAngle.x -= x;
-        cameraAngle.y += y;
+        if((cameraAngle.x - x) > xAngleMin && (cameraAngle.x - x) < xAngleMax)
+        {
+            cameraAngle.x -= x;
+        }
+        if((cameraAngle.y + y) > yAngleMin && (cameraAngle.y + y) < yAngleMax)
+        {
+            cameraAngle.y += y;
+        }
         cameraTransform.eulerAngles = cameraAngle;
     }
 
