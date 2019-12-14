@@ -23,9 +23,8 @@ public class Level1 : IQuestion
         if(index < buttons.Count - 1)
         {
             var nextButton = buttons[index + 1];
-            var nextPos = nextButton.transform.position;
-            var pos = button.transform.position;
-
+            var nextPos = nextButton.transform.localPosition;
+            var pos = button.transform.localPosition;
             Action nextAction = () => { nextButton.gameObject.transform.localPosition = pos; };
             Action action = () => { button.gameObject.transform.localPosition = nextPos; };
 

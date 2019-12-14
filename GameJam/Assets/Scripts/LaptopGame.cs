@@ -24,6 +24,8 @@ public class LaptopGame : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        RightPosition = new Vector3(-Screen.width, 0, 0);
+        transform.localPosition = RightPosition;
         LeftTime = totalTime;
         for (int i = 0; i < tabs.Count; i++)
         {
