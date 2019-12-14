@@ -19,35 +19,52 @@ public class sliderRun : MonoBehaviour
     public int powerMax = 100;
     public int powerMin = 0;
 
+    public bool slideRun;
 
+    public float currPercent;
+
+    private void Start()
+    {
+        slideRun = true;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        powerText.text = powerSlider.value.ToString();
+        if(slideRun)
+        {
+            powerText.text = ((int)powerSlider.value).ToString();
 
-        if(powerSlider.value >= powerMax)
-        {
-            powerStyle = 1;
-        }
+            if (powerSlider.value >= powerMax)
+            {
+                powerStyle = 1;
+            }
 
-        if (powerSlider.value <= powerMin)
-        {
-            powerStyle = 0;
-        }
+            if (powerSlider.value <= powerMin)
+            {
+                powerStyle = 0;
+            }
 
-        if(powerStyle == 1)
-        {
-            powerSlider.value -= powerSpeed * Time.deltaTime;
+            if (powerStyle == 1)
+            {
+                powerSlider.value -= powerSpeed * Time.deltaTime;
+            }
+            else if (powerStyle == 0)
+            {
+                powerSlider.value += powerSpeed * Time.deltaTime;
+            }
         }
-        else if(powerStyle == 0)
-        {
-            powerSlider.value += powerSpeed * Time.deltaTime;
-        }
+        
 
     }
     public void pauseSlider()
     {
+        currPercent = getPercent();
         this.GetComponent<sliderRun>().enabled = false;
+    }
+
+    public float getPercent()
+    {
+        return (powerSlider.value - powerMin) / (powerMax - powerMin);
     }
 }
