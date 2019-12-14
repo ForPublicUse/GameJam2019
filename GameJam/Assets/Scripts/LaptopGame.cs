@@ -9,12 +9,14 @@ public class LaptopGame : MonoBehaviour
     public GameManager gameManager;
     public GameObject Menu;
     public List<IQuestion> questions;
+    public List<IQuestion> questions2;
     public Text text;
     private int questionNum;
     public float totalTime = 300;
     public Slider TimeSlider;
     public float LeftTime;
     public List<Button> tabs;
+    public List<Button> tabs2;
     public GameObject add30;
     private IQuestion CurrentLevel;
     public bool CheckAlive()
@@ -29,20 +31,28 @@ public class LaptopGame : MonoBehaviour
         LeftPosition = new Vector3(-Screen.width, 0, 0);
         transform.localPosition = LeftPosition;
         LeftTime = totalTime;
-        CurrentLevel = questions[0];
+        List<IQuestion> _question = GetCurrntQuestion();
+        CurrentLevel = _question[0];
+        CurrentLevel.obj().SetActive(true);
         for (int i = 0; i < tabs.Count; i++)
         {
             var index = i;
             tabs[index].onClick.AddListener(() =>
             {
-                foreach (var question in questions)
+                foreach (var question in _question)
                 {
                     question.obj().SetActive(false);
                 }
-                questions[index].obj().SetActive(true);
-                CurrentLevel = questions[index];
+                _question[index].obj().SetActive(true);
+                CurrentLevel = _question[index];
             });
         }
+        Success();
+    }
+
+    private List<IQuestion> GetCurrntQuestion()
+    {
+        return gameManager.Round == 0 ? questions : questions2;
     }
 
     // Update is called once per frame
@@ -65,7 +75,8 @@ public class LaptopGame : MonoBehaviour
     public void Success()
     {
         questionNum = 0;
-        foreach(var question in questions)
+        List<IQuestion> _question = GetCurrntQuestion();
+        foreach (var question in _question)
         {
             if (!question.IsClear())
             {
@@ -73,11 +84,10 @@ public class LaptopGame : MonoBehaviour
             }
         }
         text.text = $@"{questionNum} Errors";
-    }
-
-    public void Fail()
-    {
-
+        if(questionNum == 0)
+        {
+            AllSuccess();
+        }
     }
 
     public void AllSuccess()
@@ -122,5 +132,6 @@ public class LaptopGame : MonoBehaviour
     void HideAddLabel()
     {
         add30.SetActive(false);
+        Success();
     }
 }
