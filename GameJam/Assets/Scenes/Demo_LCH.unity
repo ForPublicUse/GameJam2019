@@ -1508,6 +1508,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12a5edb79d5fe3240898a035d8f6d659, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xAngleMin: -30
+  xAngleMax: 40
+  yAngleMin: -20
+  yAngleMax: 70
 --- !u!1 &317076271
 GameObject:
   m_ObjectHideFlags: 0

@@ -34,11 +34,19 @@ public class cameraLookAround : MonoBehaviour
         float x = Input.GetAxis("Mouse Y");
         if((cameraAngle.x - x) > xAngleMin && (cameraAngle.x - x) < xAngleMax)
         {
-            cameraAngle.x -= x;
+            if (x != 0)
+            {
+                var tempX = Mathf.Min(Mathf.Abs(x),1) * Mathf.Abs(x) / x;
+                cameraAngle.x -= tempX;
+            }
         }
         if((cameraAngle.y + y) > yAngleMin && (cameraAngle.y + y) < yAngleMax)
         {
-            cameraAngle.y += y;
+            if (y != 0)
+            {
+                var tempY = Mathf.Min(Mathf.Abs(y), 1) * Mathf.Abs(y) / y;
+                cameraAngle.y += tempY;
+            }
         }
         cameraTransform.eulerAngles = cameraAngle;
     }

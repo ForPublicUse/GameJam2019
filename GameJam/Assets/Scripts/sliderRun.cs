@@ -24,7 +24,7 @@ public class sliderRun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        powerText.text = powerSlider.value.ToString();
+        powerText.text = ((int)powerSlider.value).ToString();
 
         if(powerSlider.value >= powerMax)
         {
