@@ -31,7 +31,7 @@ public class cameraLookAround : MonoBehaviour
             cameraMove();
         }
     }
-    bool isRunning = false;
+    bool isRunning = true;
     public void StartRunning()
     {
         isRunning = true;

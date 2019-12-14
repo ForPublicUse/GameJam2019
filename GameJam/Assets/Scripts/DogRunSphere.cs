@@ -21,6 +21,8 @@ public class DogRunSphere : MonoBehaviour
     //Dog and Player
     public float fMinDistance;
 
+    public float fMaxHeight;
+
     private float fWaitTime;
     private bool bActiveDog;
     private bool bDogReturn;
@@ -28,8 +30,10 @@ public class DogRunSphere : MonoBehaviour
     private Vector3 LastVec; 
     private Vector3 LastPos;
 
+    private bool bBreakTick;
     void Start()
     {
+        bBreakTick = false;
         bActiveDog = false;
         bDogReturn = false;
         MouseSphere.SetActive(false);
@@ -42,6 +46,10 @@ public class DogRunSphere : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(bBreakTick)
+        {
+            return;
+        }
         if (bPushSphere)
         {
             bPushSphere = false;
@@ -81,10 +89,23 @@ public class DogRunSphere : MonoBehaviour
 
     void RunSphere()
     {
-        //Dog.transform.LookAt(new Vector3(DogSphere.transform.position.x, DogSphere.transform.position.y, Dog.transform.position.z));
-        GetDogTransform().LookAt(DogSphere.transform.position);
-        Vector3 Vec = new Vector3(GetDogTransform().forward.x, GetDogTransform().forward.y, GetDogTransform().forward.z) * Time.deltaTime * fDogMoveSpeed;
+        //GetDogTransform().LookAt(DogSphere.transform.position);
+        Vector3 Vec = GetDogTransform().forward * Time.deltaTime * fDogMoveSpeed;
 
+        object ray = Camera.main.ScreenPointToRay(-GetDogTransform().up); //屏幕坐标转射线
+        RaycastHit hit;
+        bool isHit = Physics.Raycast((Ray) ray, out hit);
+        if(isHit)
+        {
+            if(hit.distance > fMaxHeight)
+            {
+                Dog.transform.LookAt(new Vector3(DogSphere.transform.position.x, DogSphere.transform.position.y, (Dog.transform.position.z + fMaxHeight)));
+            }
+            else
+            {
+                Dog.transform.LookAt(DogSphere.transform.position);
+            }
+        }
         GetDogTransform().Translate( Vec, Space.World);
 
     }
@@ -93,9 +114,10 @@ public class DogRunSphere : MonoBehaviour
     {
         if(collider.gameObject == DogSphere)
         {
-            bDogReturn = true;
             MouseSphere.SetActive(true);
             DogSphere.SetActive(false);
+            Invoke("BeginReturn", fInvokeTime);
+            bBreakTick = true;
         }
         /*
         if (collider.gameObject == Player)
@@ -140,5 +162,11 @@ public class DogRunSphere : MonoBehaviour
     Transform GetDogTransform()
     {
         return Dog.transform;
+    }
+
+    void BeginReturn()
+    {
+        bDogReturn = true;
+        bBreakTick = false;
     }
 }
