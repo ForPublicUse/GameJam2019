@@ -13,10 +13,12 @@ public class GameManager : MonoBehaviour
     public GameObject laptop;
     public LaptopGame laptopGame;
     public GameObject timeSlider;
+    public WinPanel winPanel;
 
     public cameraLookAround cameraLookAround;
     public sliderControl sliderControl;
 
+    public int Round = 0;
     private void Start()
     {
         sliderControl = FindObjectOfType<sliderControl>();
@@ -48,6 +50,7 @@ public class GameManager : MonoBehaviour
         sliderControl.StopRunning();
         cameraLookAround.StopRunning();
         gamePlayRunning = false;
+        winPanel.ShowNextWeekend(Round == 0);
     }
 
     public void StartGame()
@@ -94,6 +97,15 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             FailLogic();
+        }
+    }
+
+    public void NextWeekend()
+    {
+        if(Round == 0)
+        {
+            Round = 1;
+            StartGame();
         }
     }
 
