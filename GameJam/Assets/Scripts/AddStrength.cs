@@ -35,7 +35,7 @@ public class AddStrength : MonoBehaviour
             Shpere.GetComponent<Rigidbody>().useGravity = true;
             PushSphere(CurrRotation, (fMaxStrength - fMinStrength) * fStrengthPercentage + fMinStrength);
 
-            SetScale();
+            //SetScale();
         }
         
     }

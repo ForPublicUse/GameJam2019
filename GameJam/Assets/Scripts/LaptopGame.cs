@@ -26,6 +26,7 @@ public class LaptopGame : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        FindObjectOfType<DogRunSphere>().SetLaptopGame(this);
         LeftPosition = new Vector3(-Screen.width, 0, 0);
         transform.localPosition = LeftPosition;
         LeftTime = totalTime;

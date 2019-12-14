@@ -67,6 +67,7 @@ public class sliderControl : MonoBehaviour
         {
             if(style == 0)
             {
+                ResetUI();
                 controlCanvas.gameObject.SetActive(true);
                 //sliderRun.slideRun = true;
                 style = 1;
@@ -99,20 +100,26 @@ public class sliderControl : MonoBehaviour
                 //sliderRun.slideRun = false;
                 style = 4;
 
-                PushShpereCount = 0;
-                bgAlpha = 1;
-                filledAlpha = 1;
-                powerTextAlpha = 1;
-                bgGround.GetComponent<Image>().color = oriBgColor;
-                filled.GetComponent<Image>().color = oriFilledColor;
-                powerText.GetComponent<Text>().color = oriPowerTextColor;
-                sliderRun.GetComponent<sliderRun>().enabled = true;
-                controlCanvas.gameObject.SetActive(false);
+                ResetUI();
             }
         }
 
         
     }
+
+    public void ResetUI()
+    {
+        PushShpereCount = 0;
+        bgAlpha = 1;
+        filledAlpha = 1;
+        powerTextAlpha = 1;
+        bgGround.GetComponent<Image>().color = oriBgColor;
+        filled.GetComponent<Image>().color = oriFilledColor;
+        powerText.GetComponent<Text>().color = oriPowerTextColor;
+        sliderRun.GetComponent<sliderRun>().enabled = true;
+        controlCanvas.gameObject.SetActive(false);
+    }
+
     public void calmDown()
     {
         //if (bgAlpha > 0)
