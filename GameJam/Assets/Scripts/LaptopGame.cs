@@ -7,19 +7,46 @@ public class LaptopGame : MonoBehaviour
 {
     public GameManager gameManager;
     public GameObject Menu;
-    public List<Question> questions;
+    public List<IQuestion> questions;
     public Text text;
     private int questionNum;
+    public float totalTime = 300;
+    public Slider TimeSlider;
+    public float LeftTime;
+    public List<Button> tabs;
+    public bool CheckAlive()
+    {
+        return LeftTime > 0;
+    }
+
 
     // Start is called before the first frame update
     void Start()
     {
-        RightClick();
+        LeftTime = totalTime;
+        for (int i = 0; i < tabs.Count; i++)
+        {
+            var index = i;
+            tabs[index].onClick.AddListener(() =>
+            {
+                foreach (var question in questions)
+                {
+                    question.obj().SetActive(false);
+                }
+                questions[index].obj().SetActive(true);
+            });
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        LeftTime -= Time.deltaTime;
+        if (CheckAlive() == false)
+        {
+            gameManager.FailLogic();
+        }
+        TimeSlider.value = LeftTime / totalTime;
         if (Input.GetKeyDown(KeyCode.L))
         {
             RightClick();
