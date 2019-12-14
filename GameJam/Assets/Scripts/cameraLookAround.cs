@@ -12,6 +12,8 @@ public class cameraLookAround : MonoBehaviour
     public int yAngleMin;
     public int yAngleMax;
 
+    public int cameraSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,23 +34,48 @@ public class cameraLookAround : MonoBehaviour
     {
         float y = Input.GetAxis("Mouse X");
         float x = Input.GetAxis("Mouse Y");
-        if((cameraAngle.x - x) > xAngleMin && (cameraAngle.x - x) < xAngleMax)
+        if((cameraAngle.x - x * cameraSpeed) > xAngleMin && (cameraAngle.x - x * cameraSpeed) < xAngleMax)
         {
-            if (x != 0)
-            {
-                var tempX = Mathf.Min(Mathf.Abs(x),1) * Mathf.Abs(x) / x;
-                cameraAngle.x -= tempX;
-            }
+            //if (x != 0)
+            //{
+                //var tempX = Mathf.Min(Mathf.Abs(x),1) * Mathf.Abs(x) / x;
+                cameraAngle.x -= x * cameraSpeed;
+           // }
         }
-        if((cameraAngle.y + y) > yAngleMin && (cameraAngle.y + y) < yAngleMax)
+        if((cameraAngle.y + y * cameraSpeed) > yAngleMin && (cameraAngle.y + y * cameraSpeed) < yAngleMax)
         {
-            if (y != 0)
-            {
-                var tempY = Mathf.Min(Mathf.Abs(y), 1) * Mathf.Abs(y) / y;
-                cameraAngle.y += tempY;
-            }
+            //if (y != 0)
+           // {
+             //   var tempY = Mathf.Min(Mathf.Abs(y), 1) * Mathf.Abs(y) / y;
+                cameraAngle.y += y * cameraSpeed;
+            //}
         }
         cameraTransform.eulerAngles = cameraAngle;
     }
 
 }
+
+
+
+
+
+
+
+
+
+//        if((cameraAngle.x - x) > xAngleMin && (cameraAngle.x - x) < xAngleMax)
+//        {
+//            if (x != 0)
+//            {
+//                var tempX = Mathf.Min(Mathf.Abs(x), 1) * Mathf.Abs(x) / x;
+//cameraAngle.x -= tempX;
+//            }
+//        }
+//        if((cameraAngle.y + y) > yAngleMin && (cameraAngle.y + y) < yAngleMax)
+//        {
+//            if (y != 0)
+//            {
+//                var tempY = Mathf.Min(Mathf.Abs(y), 1) * Mathf.Abs(y) / y;
+//cameraAngle.y += tempY;
+//            }
+//        }
