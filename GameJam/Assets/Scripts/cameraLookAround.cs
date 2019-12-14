@@ -34,21 +34,21 @@ public class cameraLookAround : MonoBehaviour
     {
         float y = Input.GetAxis("Mouse X");
         float x = Input.GetAxis("Mouse Y");
-        if((cameraAngle.x - x * cameraSpeed) > xAngleMin && (cameraAngle.x - x * cameraSpeed) < xAngleMax)
+        if ((cameraAngle.x - x * cameraSpeed) > xAngleMin && (cameraAngle.x - x * cameraSpeed) < xAngleMax)
         {
-            //if (x != 0)
-            //{
-                //var tempX = Mathf.Min(Mathf.Abs(x),1) * Mathf.Abs(x) / x;
-                cameraAngle.x -= x * cameraSpeed;
-           // }
+            if (x != 0)
+            {
+                var tempX = Mathf.Min(Mathf.Abs(x), 1) * Mathf.Abs(x) / x * cameraSpeed;
+                cameraAngle.x -= tempX;
+            }
         }
-        if((cameraAngle.y + y * cameraSpeed) > yAngleMin && (cameraAngle.y + y * cameraSpeed) < yAngleMax)
+        if ((cameraAngle.y + y * cameraSpeed) > yAngleMin && (cameraAngle.y + y * cameraSpeed) < yAngleMax)
         {
-            //if (y != 0)
-           // {
-             //   var tempY = Mathf.Min(Mathf.Abs(y), 1) * Mathf.Abs(y) / y;
-                cameraAngle.y += y * cameraSpeed;
-            //}
+            if (y != 0)
+            {
+                var tempY = Mathf.Min(Mathf.Abs(y), 1) * Mathf.Abs(y) / y * cameraSpeed;
+                cameraAngle.y += tempY;
+            }
         }
         cameraTransform.eulerAngles = cameraAngle;
     }
@@ -59,23 +59,22 @@ public class cameraLookAround : MonoBehaviour
 
 
 
-
-
-
-
-//        if((cameraAngle.x - x) > xAngleMin && (cameraAngle.x - x) < xAngleMax)
+//if((cameraAngle.x - x * cameraSpeed) > xAngleMin && (cameraAngle.x - x * cameraSpeed) < xAngleMax)
 //        {
-//            if (x != 0)
-//            {
-//                var tempX = Mathf.Min(Mathf.Abs(x), 1) * Mathf.Abs(x) / x;
-//cameraAngle.x -= tempX;
-//            }
+//            //if (x != 0)
+//            //{
+//                //var tempX = Mathf.Min(Mathf.Abs(x),1) * Mathf.Abs(x) / x;
+//                cameraAngle.x -= x * cameraSpeed;
+//           // }
 //        }
-//        if((cameraAngle.y + y) > yAngleMin && (cameraAngle.y + y) < yAngleMax)
+//        if((cameraAngle.y + y * cameraSpeed) > yAngleMin && (cameraAngle.y + y * cameraSpeed) < yAngleMax)
 //        {
-//            if (y != 0)
-//            {
-//                var tempY = Mathf.Min(Mathf.Abs(y), 1) * Mathf.Abs(y) / y;
-//cameraAngle.y += tempY;
-//            }
+//            //if (y != 0)
+//           // {
+//             //   var tempY = Mathf.Min(Mathf.Abs(y), 1) * Mathf.Abs(y) / y;
+//                cameraAngle.y += y * cameraSpeed;
+//            //}
 //        }
+
+
+

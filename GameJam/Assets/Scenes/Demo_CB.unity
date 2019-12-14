@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 97778040}
-  m_IndirectSpecularColor: {r: 0.45098418, g: 0.49938756, b: 0.5665394, a: 1}
+  m_IndirectSpecularColor: {r: 0.45098484, g: 0.49938864, b: 0.5665399, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1411,7 +1411,7 @@ MonoBehaviour:
   xAngleMax: 20
   yAngleMin: 10
   yAngleMax: 100
-  cameraSpeed: 10
+  cameraSpeed: 5
 --- !u!1001 &345164289
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3451,8 +3451,8 @@ Rigidbody:
   m_GameObject: {fileID: 1215252600}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 1
+  m_AngularDrag: 0.1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -4407,6 +4407,11 @@ PrefabInstance:
         type: 3}
       propertyPath: powerSpeed
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 8603281514289862503, guid: ff553988c47b8164ba7b87e075728884,
+        type: 3}
+      propertyPath: powerMax
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff553988c47b8164ba7b87e075728884, type: 3}
