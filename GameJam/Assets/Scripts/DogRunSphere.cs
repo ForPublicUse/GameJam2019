@@ -13,8 +13,15 @@ public class DogRunSphere : MonoBehaviour
 
     public sliderControl sliderControl;
 
+    public DogAudioScript DogWalkAudioScript;
+    public int MaxAudioDistance;
+    public int MinAudioDistance;
+    public float MaxAudioPercent;
+    public float MinAudioPercent;
+
     public Animator Animator;
     public DogAudioScript DogAudioScript;
+
 
     public float fTroubleTIME;
 
@@ -239,5 +246,11 @@ public class DogRunSphere : MonoBehaviour
         this.laptopGame = laptopGame;
     }
 
-    public void DogAudioScript()
+    public void DogWalkAudio()
+    {
+        float AudioPercent;
+        float Dist = Vector3.Distance(GetDogTransform().position, Player.transform.position);
+        //if(Dist>MaxAudioDistance)
+         //= 
+    }
 }
