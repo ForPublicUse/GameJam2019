@@ -14,6 +14,7 @@ public class DogRunSphere : MonoBehaviour
     public sliderControl sliderControl;
 
     public Animator Animator;
+    public DogAudioScript DogAudioScript;
 
     public float fTroubleTIME;
 
@@ -237,4 +238,6 @@ public class DogRunSphere : MonoBehaviour
     {
         this.laptopGame = laptopGame;
     }
+
+    public void DogAudioScript()
 }
