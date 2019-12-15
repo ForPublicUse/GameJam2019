@@ -32,6 +32,11 @@ public class DogAudioScript : MonoBehaviour
         return AudioMaker.isPlaying;
     }
 
+    public void PauseAudio()
+    {
+        AudioMaker.Pause();
+    }
+
     public void PlayWalkAudio()
     {
         WalkIndex = PlayAudio(AudioDogWalk, WalkIndex);

@@ -14,13 +14,15 @@ public class DogRunSphere : MonoBehaviour
     public sliderControl sliderControl;
 
     public DogAudioScript DogWalkAudioScript;
+    public DogAudioScript DogHaAudioScript;
+    /*
     public int MaxAudioDistance;
     public int MinAudioDistance;
     public float MaxAudioPercent;
     public float MinAudioPercent;
-
+    */
     public Animator Animator;
-    public DogAudioScript DogAudioScript;
+    public DogAudioScript DogBarkAudioScript;
 
 
     public float fTroubleTIME;
@@ -160,6 +162,7 @@ public class DogRunSphere : MonoBehaviour
             }
             Vector3 Vec = GetDogTransform().forward.normalized * Time.deltaTime * fDogMoveSpeed;
             GetDogTransform().Translate(Vec, Space.World);
+            DogWalkAudio();
         }
     }
 
@@ -206,6 +209,7 @@ public class DogRunSphere : MonoBehaviour
         {
             GetDogTransform().LookAt(Player.transform.position);
             GetDogTransform().Translate(GetDogTransform().forward * Time.deltaTime * fDogMoveSpeed, Space.World);
+            DogWalkAudio();
         }
         
     }
@@ -216,6 +220,8 @@ public class DogRunSphere : MonoBehaviour
         DogSphere.SetActive(false);
         //do animation
         Animator.SetBool("Bark_b", true);
+        DogBarkAudio();
+
     }
 
     Transform GetDogTransform()
@@ -248,9 +254,51 @@ public class DogRunSphere : MonoBehaviour
 
     public void DogWalkAudio()
     {
+        //DogWalkAudioScript.AudioMaker.volume = //CheckAudioPercent();
+        if (!DogWalkAudioScript.DogAudioIsPlaying())
+        {
+            DogWalkAudioScript.PlayWalkAudio();
+        }
+        
+        if(!DogHaAudioScript.DogAudioIsPlaying())
+        {
+            DogHaAudioScript.PlayHaAudio();
+        }
+        
+    }
+
+    public void DogBarkAudio()
+    {
+        //DogWalkAudioScript.AudioMaker.volume = //CheckAudioPercent();
+        if (DogBarkAudioScript.DogAudioIsPlaying())
+        {
+            DogWalkAudioScript.PauseAudio();
+            DogHaAudioScript.PauseAudio();
+            return;
+        }
+        DogBarkAudioScript.PlayBarkAudio();
+        
+    }
+    /*
+    float CheckAudioPercent()
+    {
         float AudioPercent;
         float Dist = Vector3.Distance(GetDogTransform().position, Player.transform.position);
-        //if(Dist>MaxAudioDistance)
-         //= 
+
+        if (Dist > MaxAudioDistance)
+        {
+            AudioPercent = MinAudioPercent;
+        }
+        else if (Dist < MinAudioDistance)
+        {
+            AudioPercent = MaxAudioPercent;
+        }
+        else
+        {
+            AudioPercent = MaxAudioPercent - (MaxAudioPercent - MinAudioPercent) * MaxAudioDistance / Dist;
+        }
+
+        return AudioPercent;
     }
+    */
 }
