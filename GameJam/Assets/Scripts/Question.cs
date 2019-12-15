@@ -8,11 +8,13 @@ using UnityEngine;
 public class IQuestion:MonoBehaviour
 {
     public LaptopGame LaptopGame;
-
+    public TabButton tabButton;
     public virtual void Win()
     {
         isClear = true;
         LaptopGame.OnQuestionSolved();
+        tabButton.IsCorrect = true;
+        tabButton.UpdateUI(true);
     }
 
     protected bool isClear = false;

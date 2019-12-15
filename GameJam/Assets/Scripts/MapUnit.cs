@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class MapUnit : MonoBehaviour
 {
     public Vector2 pos;
-    public Text Right;
-    public Text Error;
+    public Image Right;
+    public Image Error;
     public Level3 level3;
     public bool isRight;
     public Button button;
@@ -16,6 +16,8 @@ public class MapUnit : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Right = gameObject.transform.Find("OK").GetComponent<Image>();
+        Error = gameObject.transform.Find("BUG").GetComponent<Image>();
         UpdateUI();
         gameObject.transform.localEulerAngles = isRight ? rightEuler : leftEuler;
         button.onClick.AddListener(OnClick);

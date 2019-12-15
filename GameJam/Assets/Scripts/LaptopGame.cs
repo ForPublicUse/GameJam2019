@@ -10,15 +10,16 @@ public class LaptopGame : MonoBehaviour
     public GameObject Menu;
     public List<IQuestion> questions;
     public List<IQuestion> questions2;
-    public Text text;
+    public Text errorText;
+    public Text timeText;
     private int questionNum;
     public float totalTime = 300;
     public Slider TimeSlider;
     public float LeftTime;
     public List<Button> tabs;
-    public List<Button> tabs2;
     public GameObject add30;
     private IQuestion CurrentLevel;
+    private List<TabButton> tabButtons = new List<TabButton>();
     public bool CheckAlive()
     {
         return LeftTime > 0;
@@ -46,9 +47,23 @@ public class LaptopGame : MonoBehaviour
                 }
                 _question[index].obj().SetActive(true);
                 CurrentLevel = _question[index];
+                UpdateBtn();
             });
+            var tabBtn = tabs[index].GetComponent<TabButton>();
+            _question[index].tabButton = tabBtn;
+            tabButtons.Add(tabBtn);
         }
+        UpdateBtn();
         Success();
+    }
+
+    private void UpdateBtn()
+    {
+        foreach (var btn in tabButtons)
+        {
+            btn.UpdateUI(false);
+        }
+        CurrentLevel.tabButton.UpdateUI(true);
     }
 
     private List<IQuestion> GetCurrntQuestion()
@@ -64,8 +79,8 @@ public class LaptopGame : MonoBehaviour
         {
             gameManager.FailLogic();
         }
-        TimeSlider.value = LeftTime / totalTime;
-
+        //TimeSlider.value = LeftTime / totalTime;
+        timeText.text = $@"{Mathf.Floor(LeftTime)}s";
 
         if (Input.GetKeyDown(KeyCode.K))
         {
@@ -84,8 +99,9 @@ public class LaptopGame : MonoBehaviour
                 questionNum++;
             }
         }
-        text.text = $@"{questionNum} Errors";
-        if(questionNum == 0)
+        errorText.text = $@"{questionNum} Errors";
+
+        if (questionNum == 0)
         {
             AllSuccess();
         }
